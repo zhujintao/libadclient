@@ -101,6 +101,7 @@ struct adConnParams {
         string search_base;
         bool secured;
         bool use_gssapi;
+        bool onssl;
 
         // LDAP_OPT_NETWORK_TIMEOUT, LDAP_OPT_TIMEOUT
         int nettimeout;
@@ -110,6 +111,7 @@ struct adConnParams {
         adConnParams() :
             secured(true),
             use_gssapi(false),
+            onssl(false),
             // by default do not touch timeouts
             nettimeout(-1), timelimit(-1)
         {};
@@ -219,7 +221,7 @@ public:
       std::map <string, std::vector <string> > getObjectAttributes(string object);
       std::map <string, std::vector <string> > getObjectAttributes(string object, const std::vector<string> &attributes);
 
-      static const string ldap_prefix;
+      static  string ldap_prefix;
 private:
       adConnParams params;
 

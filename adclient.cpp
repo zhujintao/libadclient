@@ -1,7 +1,7 @@
 #include "stdlib.h"
 #include "adclient.h"
 
-const string adclient::ldap_prefix = "ldap://";
+ string adclient::ldap_prefix = "ldap://";
 
 /*
   Active Directory class.
@@ -34,12 +34,24 @@ void adclient::logout(LDAP *ds) {
 }
 
 void adclient::login(adConnParams _params) {
+    if (_params.onssl) {
+        ldap_prefix = "ldaps://";
+    }
+
     if (!_params.uries.empty()) {
+
         for (vector <string>::iterator it = _params.uries.begin(); it != _params.uries.end(); ++it) {
+
             if (it->compare(0, ldap_prefix.size(), ldap_prefix) != 0) {
                 continue;
             }
+
             _params.uri = *it;
+
+            if (_params.onssl) {
+                _params.uri = *it + ":636"
+            }
+
             try {
                 login(&ds, _params);
                 params = _params;

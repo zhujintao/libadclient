@@ -24,6 +24,7 @@ type ADConnParams struct {
 	UseGSSAPI   bool
 	Nettimeout  int
 	Timelimit   int
+	Onssl	    bool
 }
 
 func DefaultADConnParams() (params ADConnParams) {
@@ -128,6 +129,7 @@ func Login(_params ADConnParams) (err error) {
 	params.SetUse_gssapi(_params.UseGSSAPI)
 	params.SetNettimeout(_params.Nettimeout)
 	params.SetTimelimit(_params.Timelimit)
+	params.SetOnssl(_params.Onssl)
 
 	uries := NewStringVector()
 	defer DeleteStringVector(uries)
