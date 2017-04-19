@@ -49,7 +49,7 @@ void adclient::login(adConnParams _params) {
             _params.uri = *it;
 
             if (_params.onssl) {
-                _params.uri = *it + ":636"
+                _params.uri = *it + ":636";
             }
 
             try {
